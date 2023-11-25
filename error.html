@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <!-- Add your CSS styling if needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFD2D2;
+            color: #FF0000;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #FF0000;
+            text-align: center;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        img {
+            max-width: 30%;
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='error_image.jpg') }}" alt="Error Image">
+    <h1>Oops! Something went wrong.</h1>
+    <p>{{ error_message }}</p>
+    <!-- You can include additional information or instructions here -->
+</body>
+</html>

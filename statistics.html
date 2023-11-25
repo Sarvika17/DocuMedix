@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #047676;
+            color: #C1E8E8;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        h3 {
+            color: #FFFFFF;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a {
+            color: #A1CACA;
+            margin-top: 10px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Statistics</h1>
+    <a href="{{ url_for('index') }}">Go back to Index</a>
+    <div>
+        <h3>Overall Statistics</h3>
+        <p>Total Medicines (Collection 1): {{ overall_stats.total_medicines_collection1 }}</p>
+        <p>Total Medicines (Collection 2): {{ overall_stats.total_medicines_collection2 }}</p>
+        <p>Unique Medicines (Collection 1): {{ overall_stats.unique_medicines_collection1 }}</p>
+        <p>Unique Medicines (Collection 2): {{ overall_stats.unique_medicines_collection2 }}</p>
+        <p>Common Medicines: {{ overall_stats.common_medicines }}</p>
+    </div>
+
+    <div>
+        <h3>Medicine Type Distribution</h3>
+        <canvas id="typeDistributionChart" width="400" height="200"></canvas>
+    </div>
+
+    <div>
+        <h3>Manufacturer Distribution (Collection 1)</h3>
+        <canvas id="manufacturerDistributionChart1" width="400" height="200"></canvas>
+    </div>
+
+    <div>
+        <h3>Manufacturer Distribution (Collection 2)</h3>
+        <canvas id="manufacturerDistributionChart2" width="400" height="200"></canvas>
+    </div>
+    <a href="{{ url_for('result') }}">Go back to Result</a>
+    <script>
+        // JavaScript code to create charts using Chart.js
+        var ctxTypeDistribution = document.getElementById('typeDistributionChart').getContext('2d');
+        var typeDistributionChart = new Chart(ctxTypeDistribution, {
+            type: 'bar',
+            data: {
+                labels: {{ chart_data.labels_collection1 | tojson }},
+                datasets: [{
+                    label: 'Collection 1',
+                    data: {{ chart_data.data_collection1 | tojson }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Collection 2',
+                    data: {{ chart_data.data_collection2 | tojson }},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Similar code for other charts if needed
+    </script>
+
+</body>
+</html>
+

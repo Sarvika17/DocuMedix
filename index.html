@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Information Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #047676;
+            color: #C1E8E8;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            width: 100%;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            flex: 1 1 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            width: 30%;
+            background-color: #A1CACA;
+            color: #023232;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .content {
+            width: 60%;
+            flex: 1 1 100%;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .justified-text {
+    text-align: justify;
+    text-align-last: left;
+}
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Medicine Information Portal</h1>
+
+    <form action="/search" method="post">
+        <label for="medicine_name">Enter Medicine Name:</label>
+        <input type="text" id="medicine_name" name="medicine_name" required>
+        <input type="submit" value="Search">
+    </form>
+    <div class="links">
+    	<a href="{{ url_for('statistics') }}" class="link">View Statistics</a>
+    	<a href="{{ url_for('index') }}" class="link">Back to Home</a>
+    </div>
+
+    <div class="content">
+        <p>Welcome to the Medicine Information Portal.</p> 
+        <p>Enter the name of the medicine to get detailed information.</p>
+        <img src="{{ url_for('static', filename='img2.jpg') }}" alt="Additional Image 1" style="max-width: 100%; height: auto; margin-top: 20px;">
+        <p><i>This is a combined project by Sarvika Goel and P Srinivas Reddy.</i></p>
+        <p class="justified-text"><i><em>Antibiotics</em> are medications used to treat bacterial infections.<br> They work by either killing the bacteria or inhibiting their growth.<br> Common examples include amoxicillin, penicillin, and ciprofloxacin.</i></p>
+        <p class="justified-text"><i><em>Painkillers</em> are drugs that alleviate pain.<br> They can be over-the-counter (OTC) or prescription-based.<br> Examples include acetaminophen, ibuprofen, and aspirin.</i></p>
+        <p class="justified-text"><i><em>Antihistamines</em> are used to treat allergies by blocking the effects of histamine,<br> a substance the body releases in response to allergens.<br> Loratadine and cetirizine are popular antihistamines.</i></p>
+        <p class="justified-text"><i><em>Anti-inflammatories</em> reduce inflammation and can be used for conditions like arthritis.<br> Common examples are ibuprofen and naproxen.</i></p>
+        <p class="justified-text"><i><em>Antidepressants</em> are prescribed to manage symptoms of depression and anxiety.<br> They work by affecting neurotransmitters in the brain.<br> Examples include fluoxetine, sertraline, and venlafaxine.</i></p>
+        <p class="justified-text"><i><em>Antacids</em> neutralize stomach acid and are used to relieve heartburn and indigestion.<br> Common ingredients include calcium carbonate and magnesium hydroxide.</i></p>
+        <p class="justified-text"><i>Medications to control <em>blood pressure</em> are prescribed for conditions like hypertension.<br> ACE inhibitors, beta-blockers, and diuretics are common classes.</i></p>
+    </div>
+
+   <img src="{{ url_for('static', filename='img1.jpg') }}" alt="Medicine Image" style="max-width: 35%; height: fit-content; margin-top: 15px; order: 2; margin-left: auto;">
+
+	
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #047676;
+            color: #C1E8E8;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        h3 {
+            color: #FFFFFF;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        img {
+            max-width: 30%;
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='img3.jpg') }}" alt="Search Results Image">
+    <h1>Search Results</h1>
+    {% if result_collection1 %}
+        <h3>From Collection 1:</h3>
+        <p><strong>Product Name:</strong> {{ result_collection1[0]['name'] }}</p>
+        <p><strong>Manufacturer:</strong> {{ result_collection1[0]['manufacturer_name'] }}</p>
+        <p><strong>Price:</strong> {{ result_collection1[0]['price'] }}</p>
+        <p><strong>Type of Medicine:</strong> {{ result_collection1[0]['type'] }}</p>
+        <p><strong>Pack Size Label:</strong> {{ result_collection1[0]['pack_size_label'] }}</p>
+        <p><strong>Composition:</strong> {{ result_collection1[0]['short_composition1'] }}</p>
+        <p><strong>Composition:</strong> {{ result_collection1[0]['short_composition2'] }}</p>
+    {% endif %}
+    {% if result_collection2 %}
+        <h3>From Collection 2:</h3>
+        <p><strong>Product Name:</strong> {{ result_collection2[0]['product_name'] }}</p>
+        <p><strong>Manufacturer:</strong> {{ result_collection2[0]['product_manufactured'] }}</p>
+        <p><strong>Price:</strong> {{ result_collection2[0]['product_price'] }}</p>
+        <p><strong>Medicine Description:</strong> {{ result_collection2[0]['medicine_desc'] }}</p>
+        <p><strong>Salt Composition:</strong> {{ result_collection2[0]['salt_composition'] }}</p>
+        <p><strong>Any Side Effects:</strong> {{ result_collection2[0]['side_effects'] }}</p>
+    {% endif %}
+
+    <div>
+        <h3>Medicine Type Distribution</h3>
+        <canvas id="typeDistributionChart" width="400" height="200"></canvas>
+    </div>
+    <a href="{{ url_for('statistics') }}">View Statistics</a>
+    <a href="{{ url_for('index') }}">Go back to Home Page</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    var ctxTypeDistribution = document.getElementById('typeDistributionChart').getContext('2d');
+
+    {% if result_chart_data %}
+        var typeDistributionChart = new Chart(ctxTypeDistribution, {
+            type: 'bar',
+            data: {
+                labels: {{ result_chart_data.labels | tojson }},
+                datasets: [{
+                    label: 'Collection 1',
+                    data: {{ result_chart_data.data_collection1 | tojson }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Collection 2',
+                    data: {{ result_chart_data.data_collection2 | tojson }},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    {% endif %}
+</script>
+
+
+</body>
+</html>
